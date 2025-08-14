@@ -1,0 +1,10 @@
+streamlit
+streamlit-javascript
+pymongo
+uuid
+random
+pandas
+altair
+textblob
+numpy
+Pillow
