@@ -1,0 +1,166 @@
+---
+title: "Que voulons-nous pour l’Afrique ? – Une enquête participative ouverte"
+subtitle: "Projet 1"
+output: html_document
+date: "2025-07-04"
+---
+
+
+### Objectif général :
+
+Explorer **les priorités sociales, politiques et économiques** des Africains via une **plateforme interactive** où les participants peuvent **proposer**, **évaluer**, et **classer** des idées pour l’avenir du continent.
+
+### Introduction
+
+
+**Contexte et pertinence**
+Les sociétés africaines connaissent des transformations rapides et profondes, qu’il s’agisse des transitions démographiques, des mutations économiques, des défis climatiques ou de l’essor de la jeunesse urbaine connectée. Dans ce contexte, il est plus que jamais essentiel de comprendre quelles sont les priorités et les aspirations collectives des citoyennes et citoyens du continent. Pourtant, les mécanismes traditionnels de consultation publique demeurent souvent limités, fragmentés ou réservés à des élites politiques et économiques. Il est donc nécessaire de développer de nouvelles approches participatives, inclusives et adaptées aux réalités numériques africaines.
+
+**État des connaissances et exemple inspirant**
+Le projet “All Our Ideas”, initié par Matthew Salganik à Princeton, a démontré qu’une plateforme interactive de comparaison d’idées pouvait mobiliser des milliers de participants pour produire des classements collectifs robustes sur des sujets variés (politiques publiques, priorités urbaines, innovations éducatives). Ces approches mixtes — combinant crowdsourcing et pairwise comparisons — ont montré leur efficacité pour révéler les préférences latentes et susciter l’engagement citoyen. Ces expériences ont permis de valider scientifiquement la méthode et d’établir des bonnes pratiques de collecte et d’analyse des préférences sociales.
+
+**Limites des expériences existantes**
+Cependant, la quasi-totalité des expérimentations à grande échelle menées jusqu’ici concernent des contextes occidentaux, souvent dotés d’infrastructures numériques stables et d’un accès quasi universel à internet. Peu de travaux ont exploré l’application de ce type de démarche en Afrique, où la diversité linguistique, les inégalités d’accès au numérique et les spécificités culturelles nécessitent des adaptations profondes. En outre, aucune plateforme de ce type n’a été conçue spécifiquement pour cartographier les visions et priorités collectives des Africains eux-mêmes, sur la base de leurs propositions et de leurs comparaisons directes.
+
+**Originalité et contribution attendue**
+Le projet “Que voulons-nous pour l’Afrique ?” ambitionne de combler cette lacune en développant une plateforme innovante, multilingue et inclusive, qui permettra à des milliers de participants de proposer, comparer et classer des idées pour l’avenir du continent. En articulant des outils numériques accessibles (web, mobile, WhatsApp) et une méthodologie scientifique éprouvée (modèles Bradley-Terry, analyse textuelle), ce projet contribuera à documenter les aspirations des populations africaines, à renforcer la participation citoyenne et à éclairer les décideurs publics et les bailleurs internationaux. Il s’agit ainsi d’ouvrir un espace inédit de débat collectif et de production de connaissances, directement ancré dans les réalités africaines contemporaines.
+
+
+---
+
+## 🧱 Méthodologie inspirée de Salganik :
+
+| Élément                   | Description dans ce projet                                                                                      |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| **Idées proposées**       | Par les participants eux-mêmes ou en préremplissage (e.g. éducation gratuite, monnaie unique, fin du CFA, etc.) |
+| **Pairwise comparisons**  | Chaque participant compare deux idées et choisit celle qu’il préfère.                                           |
+| **Classement agrégé**     | Les idées sont classées par score de préférence, robustesse ou consensus.                                       |
+| **Commentaires anonymes** | Facultatifs pour comprendre pourquoi une idée est soutenue ou rejetée.                                          |
+
+---
+
+## 🔨 Technologies possibles (R ou Python)
+
+* Plateforme simple via **Shiny**, **Streamlit**, ou Google Forms pour le front-end.
+* Analyse back-end avec `tidyverse`, `BradleyTerry2` (modèle de préférences), ou `PlackettLuce`.
+* Visualisation des idées les plus soutenues, des clusters par pays/groupe socio-démo.
+
+---
+
+## 💡 Exemple de pipeline
+
+### 1. Générer les idées initiales
+
+```{r}
+ideas <- c("Éducation gratuite", "Monnaie unique africaine", 
+           "Internet pour tous", "Fin de la corruption", "Union politique continentale")
+```
+
+### 2. Paires de comparaison
+
+```{r}
+pairs <- expand.grid(idea1 = ideas, idea2 = ideas) %>%
+  filter(idea1 != idea2) %>%
+  sample_n(50)
+```
+
+### 3. Interface : l’utilisateur choisit entre deux
+
+> Quelle idée préférez-vous ?
+> □ Internet pour tous
+> □ Fin de la corruption
+
+### 4. Analyse (modèle de Bradley-Terry)
+
+```{r}
+library(BradleyTerry2)
+bt_model <- BTm(outcome ~ contestant, data = comparison_data, id = "participant")
+```
+
+### 5. Résultat
+
+* **Top 5 idées les plus soutenues**
+* **Niveau de consensus/désaccord**
+* **Différences entre pays, genres, tranches d’âge** (si ces variables sont recueillies)
+
+---
+
+## 🧠 Variante avancée (inspirée du projet AllOurIdeas.org)
+
+* Interface en ligne avec pairwise voting en continu
+* API de soumission d’idées
+* Visualisation en temps réel
+* Détection d’idées émergentes via `text2vec` ou `word2vec`
+
+---
+
+## 🎯 Intérêt pour l’Afrique
+
+* Met en valeur **la voix des citoyens**, en particulier des jeunes et des populations souvent exclues du débat.
+* Permet aux chercheurs et décideurs de **voir ce que les gens valorisent réellement** – au-delà des élites.
+* Peut être localisé : *“Que voulons-nous pour le Sahel ?”*, *“...le Bénin ?”*, etc.
+
+---
+
+## 🌍 Cas d’usage dans le cadre de SICSS
+
+* Réaliser un **prototype fonctionnel en Shiny** pendant la semaine
+* Lancer une mini-expérience sur le campus ou dans un réseau local (e.g. WhatsApp)
+* Présenter les résultats visuellement (classement, diagramme circulaire, heatmap)
+* Réfléchir aux biais d’échantillonnage, à la gouvernance des idées, et aux potentiels usages politiques
+
+
+## Quelques références
+
+
+### 🔹 **Sur All Our Ideas et les méthodes comparatives**
+
+1. **Salganik, M. J.** (2019). *Bit by Bit: Social Research in the Digital Age*. Princeton University Press.
+
+   * Chapitre 3 et 4 : explication du projet All Our Ideas et de l’approche pairwise comparison.
+   * En ligne : [bitbybitbook.com](https://www.bitbybitbook.com/)
+
+2. **Salganik, M. J., & Levy, K. E. C.** (2015). Wiki surveys: Open and quantifiable social data collection. *PLOS ONE*, 10(5), e0123483.
+
+   * DOI : [10.1371/journal.pone.0123483](https://doi.org/10.1371/journal.pone.0123483)
+
+3. **Salganik, M. J., et al.** (2013). The Public Agenda Project: Using Wiki Surveys to Inform Public Policy.
+
+   * Présentation sur l’application concrète de la méthode dans les politiques publiques.
+
+---
+
+### 🔹 **Sur la participation citoyenne et le numérique en Afrique**
+
+4. **Friederici, N., Ojanperä, S., & Graham, M.** (2017). The impact of connectivity in Africa: Grand visions and the mirage of inclusive digital development. *Electronic Journal of Information Systems in Developing Countries*, 79(2), 1–20.
+
+   * DOI : [10.1002/j.1681-4835.2017.tb00573.x](https://doi.org/10.1002/j.1681-4835.2017.tb00573.x)
+
+5. **Oyedemi, T. D.** (2015). Participation, citizenship and internet use in Africa: A study of South Africa and Nigeria. *Telematics and Informatics*, 32(2), 245–256.
+
+   * DOI : [10.1016/j.tele.2014.09.002](https://doi.org/10.1016/j.tele.2014.09.002)
+
+6. **UNDP.** (2016). *A New Vision for Citizen Engagement: Harnessing digital technology for inclusion in Africa*. United Nations Development Programme.
+
+   * Rapport disponible en ligne.
+
+---
+
+### 🔹 **Sur le crowdsourcing d’idées et la gouvernance**
+
+7. **Brabham, D. C.** (2013). *Crowdsourcing*. MIT Press Essential Knowledge Series.
+
+   * Ouvrage de référence sur la science participative et le crowdsourcing.
+
+8. **Aitamurto, T.** (2012). Crowdsourcing for democracy: A new era in policy-making. *Public Policy Research*, 19(4), 374–379.
+
+   * DOI : [10.1111/j.1744-540X.2012.00701.x](https://doi.org/10.1111/j.1744-540X.2012.00701.x)
+
+---
+
+### 🔹 **Exemple de plateformes inspirantes**
+
+* **All Our Ideas** : [allourideas.org](https://www.allourideas.org/)
+* **Participedia** : [participedia.net](https://www.participedia.net/)
+* **Your Priorities** (Citizens Foundation) : [yrpri.org](https://yrpri.org/)
+
