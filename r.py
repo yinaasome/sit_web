@@ -18,7 +18,7 @@ import base64
 st.set_page_config(page_title="Wiki Survey", layout="wide", page_icon="🗳️")
 
 # === Configuration MongoDB ===
-MONGO_URI = st.secrets["MONGO_URI"]
+DB_TOKEN = st.secrets["MONGO_URI"]
 DB_NAME = "Africa"
 
 # --- Connexion à MongoDB ---
@@ -26,7 +26,7 @@ DB_NAME = "Africa"
 def get_db_connection():
     """Obtenir une connexion à MongoDB"""
     try:
-        client = MongoClient(MONGO_URI)
+        client = MongoClient(DB_TOKEN)
         db = client[DB_NAME]
         return db
     except Exception as e:
@@ -1806,3 +1806,4 @@ def main():
 if __name__ == "__main__":
 
     main()
+
