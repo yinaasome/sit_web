@@ -24,7 +24,7 @@ st.set_page_config(
 )
 
 # === Configuration MongoDB ===
-MONGO_URI = "mongodb://localhost:27017/"
+MONGO_URI = DB_TOKEN
 DB_NAME = "Africas"
 
 # --- Connexion à MongoDB ---
@@ -1656,3 +1656,4 @@ def main():
 # === Point d'entrée ===
 if __name__ == "__main__":
     main()
+
