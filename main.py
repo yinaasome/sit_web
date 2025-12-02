@@ -24,7 +24,7 @@ st.set_page_config(
 )
 
 # === Configuration MongoDB ===
-MONGO_URI = DB_TOKEN
+MONGO_URI = "mongodb://mongo:wlZXJSWdRhWxJhSkMhQIvtjHnyTQylRB@centerbeam.proxy.rlwy.net:19264"
 DB_NAME = "Africas"
 
 # --- Connexion à MongoDB ---
@@ -1656,4 +1656,5 @@ def main():
 # === Point d'entrée ===
 if __name__ == "__main__":
     main()
+
 
