@@ -24,7 +24,7 @@ st.set_page_config(
 )
 
 # === Configuration MongoDB ===
-MONGO_URI = "mongodb://mongo:wlZXJSWdRhWxJhSkMhQIvtjHnyTQylRB@centerbeam.proxy.rlwy.net:19264"
+MONGO_PUBLIC_URL = "mongodb://mongo:wlZXJSWdRhWxJhSkMhQIvtjHnyTQylRB@centerbeam.proxy.rlwy.net:19264"
 DB_NAME = "Africas"
 
 # --- Connexion à MongoDB ---
@@ -32,7 +32,7 @@ DB_NAME = "Africas"
 def get_db_connection():
     """Obtenir une connexion à MongoDB"""
     try:
-        client = MongoClient(MONGO_URI)
+        client = MongoClient(MONGO_PUBLIC_URL)
         db = client[DB_NAME]
         return db
     except Exception as e:
@@ -1656,6 +1656,7 @@ def main():
 # === Point d'entrée ===
 if __name__ == "__main__":
     main()
+
 
 
 
