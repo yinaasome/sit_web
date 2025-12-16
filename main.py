@@ -24,7 +24,7 @@ st.set_page_config(
 )
 
 # === Configuration MongoDB ===
-MONGO_URI = "yinaasome:SjUdfandFAhUIOTG@cluster0.5vnzrjg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0" 
+MONGO_URI = "mongodb://localhost:27017/"
 DB_NAME = "Africas"
 
 # --- Connexion à MongoDB ---
@@ -1656,12 +1656,3 @@ def main():
 # === Point d'entrée ===
 if __name__ == "__main__":
     main()
-
-
-
-
-
-
-
-
-
