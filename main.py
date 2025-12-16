@@ -24,8 +24,8 @@ st.set_page_config(
 )
 
 # === Configuration MongoDB ===
-MONGO_URI = "mongodb://localhost:27017/"
-DB_NAME = "Africas"
+MONGO_URI = "mongodb://mongo:WGLPiIcYKLnGksuHaBpVJNcJjwCpURei@metro.proxy.rlwy.net:14731"
+DB_NAME = "Afq"
 
 # --- Connexion à MongoDB ---
 @st.cache_resource
@@ -1656,3 +1656,4 @@ def main():
 # === Point d'entrée ===
 if __name__ == "__main__":
     main()
+
