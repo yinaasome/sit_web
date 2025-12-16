@@ -1,8 +1,9 @@
-streamlit
-streamlit-javascript
-pymongo
-pandas
-altair
-numpy
-Pillow
-textblob
+streamlit>=1.28.0
+streamlit-javascript>=0.1.5
+pymongo>=4.5.0
+pandas>=2.0.0
+altair>=5.0.0
+textblob>=0.17.1
+numpy>=1.24.0
+pillow>=10.0.0
+python-dotenv>=1.0.0
